@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-uat": "ng build --configuration=uat",
+    "build-dev": "ng build --configuration=dev",
+    "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:task-management": "node dist/task-management/server/server.mjs"
