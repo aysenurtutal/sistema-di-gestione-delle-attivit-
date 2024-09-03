@@ -15,11 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/task-management",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -28,18 +28,14 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/public/"
               }
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -63,7 +59,8 @@
               ],
               "outputHashing": "all",
               "aot": true,
-              "outputPath": "dist/prod"
+              "outputPath": "dist/prod",
+              "buildOptimizer": true
             },
             "uat": {
               "budgets": [
@@ -86,7 +83,8 @@
               ],
               "outputHashing": "all",
               "aot": true,
-              "outputPath": "dist/uat"
+              "outputPath": "dist/uat",
+              "buildOptimizer": true
             },
             "dev": {
               "budgets": [
@@ -103,7 +101,8 @@
               ],
               "outputHashing": "all",
               "aot": true,
-              "outputPath": "dist/dev"
+              "outputPath": "dist/dev",
+              "buildOptimizer": true
             },
 
             "development": {

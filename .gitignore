@@ -40,3 +40,18 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Angular cache
+.angular/
+# IDEs and Editors
+.idea/
+.vscode/
+# System files
+.DS_Store
+Thumbs.db
+# Temporary files
+*.tmp
+*.log
+# Generated files
+*.js.map
+*.d.ts
