@@ -1,5 +1,5 @@
 <div class="p-grid p-dir-col ml-4">
-  <div class="p-col-12">
+  <div class="p-col-12" style="width: 100%">
 
     <div style="display: flex;">
       <div style="margin-bottom: 10px; display: flex; justify-content: center;width: 50%;">
@@ -13,12 +13,18 @@
 
     <div class="p-grid">
       <!-- Unstarted Column -->
-      <div pDroppable (onDrop)="onTaskDrop('unstarted')">
+      <div pDroppable class="columns" (onDrop)="onTaskDrop('unstarted')">
         <div  style="display: flex; flex-direction: column;">
           <h3 style="text-align: center;color: blue">TODO</h3>
         </div>
 
         <div class="p-col">
+          <div *ngIf="isLoading" style="margin-bottom: 10px;">
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+          </div>
+
           <div *ngFor="let task of filterTasks('unstarted', searchTerm)" pDraggable (onDragStart)="dragStart(task)"
                (onDragEnd)="dragEnd()">
             <p-card [styleClass]="task.status">
@@ -32,8 +38,8 @@
                     </p-tag>
                   </div>
                 </div>
-                <p>{{ task.description }}</p>
-                <p>{{ task.project }}</p>
+                <p><strong style="color: #b6754d">Desc: </strong>{{ task.description }}</p>
+                <p><strong style="color: #b6754d">Project: </strong>{{ task.project }}</p>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div style="flex: 1; margin-right: 10px;">
                     <p-progressBar [value]="task.progress"></p-progressBar>
@@ -51,12 +57,17 @@
       </div>
 
       <!-- In Progress Column -->
-      <div pDroppable (onDrop)="onTaskDrop('in-progress')">
+      <div pDroppable class="columns"  (onDrop)="onTaskDrop('in-progress')">
         <div  style="display: flex; flex-direction: column;">
           <h3 style="text-align: center;color: orange">ONGOING</h3>
         </div>
 
         <div class="p-col">
+          <div *ngIf="isLoading" style="margin-bottom: 10px;">
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+          </div>
           <div *ngFor="let task of filterTasks('in-progress', searchTerm)" pDraggable (onDragStart)="dragStart(task)"
                (onDragEnd)="dragEnd()">
             <p-card [styleClass]="task.status">
@@ -70,8 +81,8 @@
                     </p-tag>
                   </div>
                 </div>
-                <p>{{ task.description }}</p>
-                <p>{{ task.project }}</p>
+                <p><strong style="color: #b6754d">Desc: </strong>{{ task.description }}</p>
+                <p><strong style="color: #b6754d">Project: </strong>{{ task.project }}</p>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div style="flex: 1; margin-right: 10px;">
                     <p-progressBar [value]="task.progress"></p-progressBar>
@@ -90,11 +101,16 @@
 
 
       <!-- Completed Column -->
-      <div pDroppable (onDrop)="onTaskDrop('completed')">
+      <div pDroppable class="columns"  (onDrop)="onTaskDrop('completed')">
         <div  style="display: flex; flex-direction: column;">
           <h3 style="text-align: center;color:green">COMPLETED</h3>
         </div>
         <div class="p-col">
+          <div *ngIf="isLoading" style="margin-bottom: 10px;">
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader appearance="" [theme]="{ 'width': '100%', 'height': '80px', 'margin-bottom': '10px' }"></ngx-skeleton-loader>
+          </div>
           <div *ngFor="let task of filterTasks('completed', searchTerm)" pDraggable (onDragStart)="dragStart(task)"
                (onDragEnd)="dragEnd()">
             <p-card [styleClass]="task.status">
@@ -108,8 +124,8 @@
                     </p-tag>
                   </div>
                 </div>
-                <p>{{ task.description }}</p>
-                <p>{{ task.project }}</p>
+                <p><strong style="color: #b6754d">Desc: </strong>{{ task.description }}</p>
+                <p><strong style="color: #b6754d">Project: </strong>{{ task.project }}</p>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div style="flex: 1; margin-right: 10px;">
                     <p-progressBar [value]="task.progress"></p-progressBar>
@@ -127,12 +143,8 @@
       </div>
 
     </div>
-  </div>
-</div>
 
-<div *ngIf="isLoading" class="overlay">
-  <p-spinner></p-spinner>
-  <p>Loading tasks...</p>
+  </div>
 </div>
 
 

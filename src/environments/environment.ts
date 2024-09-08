@@ -6,9 +6,8 @@ export const environment = {
   production: false,
   uat: false,
   development: true,
-  domain: 'https://arpab.tagpz.it/',
-  domainForLocalhost: 'https://arpab.tagpz.it/',
-  apiRoot: 'https://arpab.tagpz.it/api/',
+  domain: 'https://todolist2-6eb0e.web.app/',
+  apiRoot: 'https://todolist2-6eb0e.web.app/',
   defaultImage: './assets/img/default.png',
 };
 

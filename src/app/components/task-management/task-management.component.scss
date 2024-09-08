@@ -1,3 +1,10 @@
+:host {
+  display: block!important;
+  width: 100% !important;
+}
+.columns{
+  width: 33%;
+}
 .p-grid {
   display: flex;
   flex-wrap: wrap;
@@ -25,12 +32,7 @@
 .completed {
   border-left: 4px solid green;
 }
-.taskCard{
-  max-width: 400px;
-  width: 400px;
-  max-height: 600px;
-  overflow: overlay;
-}
+
 
 .spinner-container {
   display: flex;
@@ -55,7 +57,7 @@
 
 .p-col {
   max-height: 500px;
-  width:390px;
+  //width:390px;
   overflow-y: auto;
   margin-right: 30px;
 }
@@ -100,26 +102,36 @@ p {
 }
 
 @media (max-width: 580px) and (min-width: 400px){
-  .p-col {
-    width: 220px;
-  }
   .editButtons {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 }
-@media (max-width: 400px) and (min-width: 200px){
+@media (max-width: 450px) and (min-width: 200px){
   .p-col {
-    width: 150px;
+    width: 100%;
   }
-  .editButtons {
-    display: flex;
+
+}
+@media (max-width: 700px){
+  .columns{
+    width:  100%;
+  }
+  .p-grid {
     flex-direction: column;
-    gap: 10px;
   }
 }
+
 .editButtons {
   display: flex;
   gap: 10px;
 }
+
+
+//:host {
+//  display: block;
+//  min-width: 5rem; /* Sayfa genelinde minimum genişlik */
+//  //overflow-x: auto; /* Taşmayı engellemek için yatay kaydırma */
+//  overflow: hidden;
+//}

@@ -1,5 +1,5 @@
  <div class="projects">
-   <p-toolbar *ngIf="!config?.data" class="col-12">
+   <p-toolbar class="col-12">
      <ng-template pTemplate="left">
        <div class="search-container">
               <span class="p-input-icon-left" style="max-width: 400px;">
@@ -17,13 +17,18 @@
          <div class="p-d-flex p-jc-between p-ai-center">
            <div class="p-d-flex p-ai-center">
              <label style="font-size: 16px; font-weight:600" for="rowsPerPage">Result: </label>
-             <p-dropdown id="rowsPerPage" [options]="[5, 10, 20, 50]" [(ngModel)]="dt.rows"></p-dropdown>
+             <p-dropdown id="rowsPerPage" [options]="[5, 10, 20, 50]" [(ngModel)]="rowsPerPage" (ngModelChange)="updateRowsPerPage()"></p-dropdown>
            </div>
          </div>
        </div>
      </ng-template>
    </p-toolbar>
-   <p-table #dt [rows]="10"  [paginator]="true" [globalFilterFields]="['title', 'description', 'status', 'project', 'tag', 'progress', 'createdAt', 'startDate', 'dueDate']"
+
+   <div *ngIf="isLoading" style="text-align: center; height: 400px;">
+     <ngx-skeleton-loader appearance="" [theme]="{ 'width': '80%', 'height': '500px', 'border-radius': '8px' }"></ngx-skeleton-loader>
+   </div>
+
+   <p-table  *ngIf="!isLoading" #dt [rows]="rowsPerPage"  [paginator]="true" [globalFilterFields]="['title', 'description', 'status', 'project', 'tag', 'progress', 'createdAt', 'startDate', 'dueDate']"
             [value]="tasks" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Risultati {first} a {last} di {totalRecords}" [showCurrentPageReport]="true"
             styleClass="p-datatable-gridlines" scrollHeight="450px" scrollable="true"

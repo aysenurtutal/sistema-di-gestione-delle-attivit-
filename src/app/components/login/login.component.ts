@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     username: string = '';
     password: string = '';
 
-    apiRoot = environment.domainForLocalhost;
+    apiRoot = environment.apiRoot;
     constructor(private router: Router,
                 private authService: AuthorizationService,
                 private apiService: ApiService) {

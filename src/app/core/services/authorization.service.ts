@@ -18,7 +18,7 @@ export class AuthorizationService {
 
   removeAuthentication(): void {
     localStorage.clear();
-    location.href = 'http://localhost:4545/task-management';
+    location.href = 'https://todolist2-6eb0e.web.app/login';
     // location.href = environment.domainForLocalhost;
     // // degıstır deploy alırken domain olarak
   }

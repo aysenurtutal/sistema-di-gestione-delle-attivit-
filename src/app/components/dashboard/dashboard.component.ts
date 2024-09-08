@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {CardModule} from "primeng/card";
 import {ButtonDirective} from "primeng/button";
 import {ChartModule} from "primeng/chart";
@@ -16,6 +16,7 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Router} from "@angular/router";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {TaskListTableComponent} from "../task-list-table/task-list-table.component";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -33,7 +34,9 @@ import {TaskListTableComponent} from "../task-list-table/task-list-table.compone
     DropdownModule,
     FormsModule,
     ToolbarModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    NgxSkeletonLoaderModule,
+    NgIf
 
   ]
 })
@@ -67,49 +70,56 @@ export class DashboardComponent implements OnInit {
   priorityTasks: any[] = [];
   selectedTask: any;
   ref!: DynamicDialogRef;
+  isLoading: boolean = true;
   // options: any = {completed: this.completedTasks, inProgres: this.inProgressTasks, toDo: this.toDoTasks}
   constructor(private dialogService: DialogService,
               private router: Router) {}
 
   ngOnInit() {
-    // Görevleri localStorage'dan al
-    const storedTasks = localStorage.getItem('tasks');
-    if (storedTasks) {
-      this.tasks = JSON.parse(storedTasks);
-    }
+    this.isLoading = true;
 
-    this.priorityTasks = this.tasks.filter(x => x.tag == 'Urgent' && (x.status == 'unstarted' || x.status == 'in-progress'));
-    this.calculateDashboardData();
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    this.data = {
-      labels: ['ToDo', 'OnGoing', 'Completed'],
-      datasets: [
-        {
-          data: [this.toDoTasks, this.inProgressTasks, this.completedTasks],
-          backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-          hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-        }
-      ]
-    };
-
-    this.options = {
-      plugins: {
-        legend: {
-          labels: {
-            usePointStyle: true,
-            color: textColor
-          }
-        }
-      },
-      onClick: (event: MouseEvent, chartElement: any[]) => {
-        if (chartElement.length) {
-          const index = chartElement[0].index; // Get the index of the clicked segment
-          this.handleSegmentClick(index); // Call the handler function
-        }
+    setTimeout(() => {
+      const storedTasks = localStorage.getItem('tasks');
+      if (storedTasks) {
+        this.tasks = JSON.parse(storedTasks);
+        this.isLoading = false;
       }
 
-    };
+      this.priorityTasks = this.tasks.filter(x => x.tag == 'Urgent' && (x.status == 'unstarted' || x.status == 'in-progress'));
+      this.calculateDashboardData();
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--text-color');
+      this.data = {
+        labels: ['ToDo', 'OnGoing', 'Completed'],
+        datasets: [
+          {
+            data: [this.toDoTasks, this.inProgressTasks, this.completedTasks],
+            backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
+            hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+          }
+        ]
+      };
+
+      this.options = {
+        plugins: {
+          legend: {
+            labels: {
+              usePointStyle: true,
+              color: textColor
+            }
+          }
+        },
+        onClick: (event: MouseEvent, chartElement: any[]) => {
+          if (chartElement.length) {
+            const index = chartElement[0].index; // Get the index of the clicked segment
+            this.handleSegmentClick(index); // Call the handler function
+          }
+        }
+
+      };
+      this.isLoading = false;
+    }, 1000)
+
   }
   handleSegmentClick(index: number) {
     switch (index) {

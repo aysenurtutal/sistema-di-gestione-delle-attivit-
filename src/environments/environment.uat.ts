@@ -2,9 +2,8 @@ export const environment = {
   production: false,
   uat: true,
   development: false,
-  baseRoot: 'https://harmonyapi.loreal.com.tr/',
-  apiRoot: 'https://uat-harmonyapi.loreal.com.tr/api/',
-  domain: 'https://uat-harmony.loreal.com.tr/',
-  paymentPortalDomain: 'https://paymentportal-stg.loreal.com.tr/',
+  baseRoot: 'https://todolist2-6eb0e.web.app/',
+  apiRoot: 'https://todolist2-6eb0e.web.app/',
+  domain: 'https://todolist2-6eb0e.web.app/',
   defaultImage: './assets/img/default.png',
 };

@@ -20,6 +20,7 @@ import {DragDropModule} from "primeng/dragdrop";
 import {CdkDropList} from "@angular/cdk/drag-drop";
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import {ShowSelectedTaskDialogComponent} from "../show-selected-task-dialog/show-selected-task-dialog.component";
+import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @Component({
   selector: 'app-task-management',
@@ -45,7 +46,8 @@ import {ShowSelectedTaskDialogComponent} from "../show-selected-task-dialog/show
     NgClass,
     ScrollPanelModule,
     DragDropModule,
-    CdkDropList
+    CdkDropList,
+    NgxSkeletonLoaderModule
   ],
   encapsulation: ViewEncapsulation.None,
 
@@ -56,9 +58,10 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
   task: TaskManagementDto = { id: 0, title: '', description: '', status: '', tag: '', project:'',  progress: 0 }; // Initialize task object
   tasks: TaskManagementDto[] = [];
   ref!: DynamicDialogRef;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   draggedTask: any = null;
   searchTerm: string = '';
+
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
@@ -73,21 +76,26 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
-    if(!localStorage.getItem('tasks')){
-      this.apiService.getTasks().subscribe(
-        tasks => {
-          this.tasks = tasks.sort((a, b) => b?.id - a?.id);
-          !localStorage.getItem('tasks') ? localStorage.setItem('tasks', JSON.stringify(this.tasks)) : [];
-        },
-        error => {
-          console.error('Error loading tasks:', error);
-        }
-      );
-    }else{
-      const tasksFromStorage = localStorage.getItem('tasks');
-      this.tasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
-
-    }
+    this.isLoading = true;
+    setTimeout(() => {
+      if(!localStorage.getItem('tasks')){
+        this.apiService.getTasks().subscribe(
+          tasks => {
+            this.tasks = tasks.sort((a, b) => b?.id - a?.id);
+            !localStorage.getItem('tasks') ? localStorage.setItem('tasks', JSON.stringify(this.tasks)) : [];
+            this.isLoading = false;
+          },
+          error => {
+            console.error('Error loading tasks:', error);
+            this.isLoading = false;
+          }
+        );
+      }else{
+        const tasksFromStorage = localStorage.getItem('tasks');
+        this.tasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
+        this.isLoading = false;
+      }
+    }, 1000);
 
   }
 
@@ -101,6 +109,7 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
     ));
   }
   openCreatePopup(title: string) {
+    this.isLoading = true;
     const lastUserId = this.tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0);
     this.ref = this.dialogService.open(TaskDialogComponent, {
       header: title,
@@ -113,6 +122,7 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
       data: { title: title, lastUserId: lastUserId},
     });
     this.ref.onClose.subscribe((result) => {
+      this.isLoading = false;
       const tasksFromStorage = localStorage.getItem('tasks');
       this.tasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
       // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Data Created', life: 3000 });
