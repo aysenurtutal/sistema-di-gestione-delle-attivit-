@@ -1,3 +1,181 @@
-/* You can add global styles to this file, and also import other style files */
+//// Custom Theming for Angular Material
+//// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@include mat.core();
+
+///* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
+//// Plus imports for other components in your app.
+//
+//// Include the common styles for Angular Material. We include this here so that you only
+//// have to load a single css file for Angular Material in your app.
+//// Be sure that you only ever include this mixin once!
+//
+//// Define the palettes for your theme using the Material Design palettes available in palette.scss
+//// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+//// hue. Available color palettes: https://material.io/design/color/
+//$primeng-quickstart-cli-primary: mat.define-palette(mat.$indigo-palette);
+//$primeng-quickstart-cli-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+//
+//// The warn palette is optional (defaults to red).
+//$primeng-quickstart-cli-warn: mat.define-palette(mat.$red-palette);
+//
+//// Create the theme object. A theme consists of configurations for individual
+//// theming systems such as "color" or "typography".
+//$primeng-quickstart-cli-theme: mat.define-light-theme((
+//  color: (
+//    primary: $primeng-quickstart-cli-primary,
+//    accent: $primeng-quickstart-cli-accent,
+//    warn: $primeng-quickstart-cli-warn,
+//  )
+//));
+//
+//// Include theme styles for core and each component used in your app.
+//// Alternatively, you can import and @include the theme mixins for each component
+//// that you are using.
+//@include mat.all-component-themes($primeng-quickstart-cli-theme);
+//
+///*!* You can add global styles to this file, and also import other style files *!*/
+//
+///*$gutter: 1rem;*/
+//@import "assets/layout/styles/layout/layout.scss";
+//
+///* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+@import 'primeng/resources/themes/saga-blue/theme.css';
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+///* Demos */
+@import "assets/demo/styles/flags/flags.css";
+@import "assets/demo/styles/badges.scss";
+@import "assets/demo/styles/code.scss";
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Üstte olması için */
+}
+
+.spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #3498db; /* Spinner rengini ayarlayın */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.p-sidebar {
+  top: 85px;
+  margin-left: 15px;
+  background-color: rgb(64,83,92);
+  border-radius: 30px;
+}
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+app-topbar {
+  height: 60px;
+}
+
+.layout-content {
+  display: flex;
+  background-color: #c5d7ee9e;
+  flex: 1;
+  min-width: 5rem;
+}
+.layout-content table {
+  width: 100%; /* Tabloların genişliğini %100 yaparak taşma engellenir */
+  min-width: 5rem; /* Minimum genişlik */
+  overflow-x: auto; /* Taşma durumunda yatay kaydırma */
+}
+@media (max-width: 768px) {
+  .layout-content {
+    padding: 1rem;
+  }
+}
+app-sidebar {
+  width: 15rem;
+  //height: calc(100vh - 60px);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+.p-menubar {
+  background-color: antiquewhite;
+}
+.customMenu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.p-menu {
+  flex-grow: 1; /* Ensure the menu content takes full height */
+  background-color: antiquewhite;
+}
+router-outlet {
+  flex: 0;
+}
+
+.layout-mask {
+  /* Add styles for the mask if needed */
+}
+.sidebar-footer {
+  margin-top: auto; /* Push this section to the bottom */
+  border-top: 1px solid #ccc; /* Optional: add a border at the top of the footer */
+  padding: 1rem; /* Padding for spacing */
+  background-color: #f4f4f4; /* Background for footer */
+}
+
+.p-menu-start{
+  text-align: center;
+}
+body .p-scrollpanel .p-scrollpanel-bar {
+  background: rgb(25, 25, 112) !important;
+  border: 0 none !important;
+}
+.p-scrollpanel-content {
+  padding: 0!important;
+}
+
+:host ::ng-deep .p-dialog {
+  max-height: 100% !important;
+}
+
+@media screen and (max-width: 960px) {
+  .p-menubar.p-menubar-mobile-active .p-menubar-root-list {
+    width:220px;
+    background-color: antiquewhite;
+  }
+}
+.logout-button {
+  position: relative;
+  top: -5px; /* Adjust this value as needed */
+}
+
+.logout-button i {
+  font-size: 1.5rem;
+  color: gray;
+}

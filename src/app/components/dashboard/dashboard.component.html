@@ -1,0 +1,140 @@
+<div class="dashboard">
+  <div class="stats">
+    <div>
+      <h2 style="margin-left: 20px; color: blue">OVERVIEW</h2>
+    </div>
+     <div style="display: flex; flex-wrap: wrap;align-self: center;">
+       <p-card class="card-top ml-4" (click)="openTaskDialog(updatedTaskList)">
+         <button disabled="true" class="p-button-rounded p-button-success card-buttons mr-4 mt-5" pButton pRipple icon="pi pi-pen-to-square" ></button>
+         <div class="stat">
+           <h3  style="color: forestgreen;">{{ updatedTasks }} UPDATED</h3>
+           <p>in the last 7 days</p>
+         </div>
+       </p-card>
+       <p-card class="card-top ml-4" (click)="openTaskDialog(newTaskList)">
+         <button disabled="true" class="p-button-rounded p-button-primary card-buttons mr-4 mt-5" pButton pRipple icon="pi pi-plus-circle" ></button>
+         <div class="stat">
+           <h3  style="color: blue;">{{ newTasks }} NEW</h3>
+           <p>in the last 7 days</p>
+         </div>
+       </p-card>
+       <p-card class="card-top ml-4" (click)="openTaskDialog(dueTaskList)">
+         <button disabled="true" class="p-button-rounded p-button-danger card-buttons mr-4 mt-5" pButton pRipple icon="pi pi-calendar-plus" ></button>
+         <div class="stat">
+           <h3 style="color: red;">{{ dueTasks }} DUE</h3>
+           <p>in the next 7 days</p>
+         </div>
+       </p-card>
+       <p-card class="card-top ml-4">
+         <div>
+           <p-chart responsive  height="115px" type="pie" [data]="data" [options]="options" />
+         </div>
+       </p-card>
+
+     </div>
+  </div>
+
+      <div class="card-alerts ml-3 mt-3">
+        <p-toolbar class="col-12">
+          <ng-template pTemplate="left">
+            <h3 style="color: red">Urgent Tasks</h3>
+          </ng-template>
+          <ng-template pTemplate="center">
+            <div class="search-container">
+              <span class="p-input-icon-left" style="max-width: 400px;">
+<!--                  <i class="pi pi-search" style="margin-right: 5px;"></i>-->
+                 <input style="background-color: white;border-color: white;height:30px" pInputText type="text"
+                        (input)="filterGlobal($event, 'contains')"
+                        placeholder="Search Status"
+                        class="search-input"/>
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="right" >
+            <div class="custom-paginator-top ml-3">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                <div class="p-d-flex p-ai-center">
+                  <label style="font-size: 16px; font-weight:600" for="rowsPerPage">Result: </label>
+                  <p-dropdown id="rowsPerPage" [options]="[5, 10, 20, 50]" [(ngModel)]="dt.rows"></p-dropdown>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-toolbar>
+        <p-table #dt [rows]="10"  [paginator]="true" [globalFilterFields]="['status']"
+                 [value]="priorityTasks" [rowHover]="true" dataKey="id"
+                 currentPageReportTemplate="Risultati {first} a {last} di {totalRecords}" [showCurrentPageReport]="true"
+                 styleClass="p-datatable-gridlines"
+                 [tableStyle]="{ 'min-width': '25rem' , 'max-width': '50rem'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="title" style="text-align: center;background-color: lightgray">
+                Title<p-sortIcon field="title"></p-sortIcon></th>
+              <th pSortableColumn="description" style="text-align: center;background-color: lightgray">
+                Description<p-sortIcon field="description"></p-sortIcon></th>
+              <th pSortableColumn="status" style="text-align: center;background-color: lightgray">
+                Status<p-sortIcon field="status"></p-sortIcon></th>
+              <th pSortableColumn="progress" style="text-align: center;background-color: lightgray">
+                Progress<p-sortIcon field="progress"></p-sortIcon></th>
+              <th pSortableColumn="project" style="text-align: center;background-color: lightgray">
+                Project<p-sortIcon field="project"></p-sortIcon></th>
+              <th pSortableColumn="startDate" style="text-align: center;background-color: lightgray">
+                Start Date<p-sortIcon field="startDate"></p-sortIcon></th>
+              <th pSortableColumn="dueDate" style="text-align: center;background-color: lightgray">
+                Due Date<p-sortIcon field="dueDate"></p-sortIcon></th>
+              <th pSortableColumn="createdAt" style="text-align: center;background-color: lightgray">
+                Created Date<p-sortIcon field="createdAt"></p-sortIcon></th>
+            </tr>
+
+            <tr>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="title"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="description"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="status"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="progress"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="project"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="startDate"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="dueDate"></p-columnFilter>
+              </th>
+              <th style="background-color: lightgray">
+                <p-columnFilter type="text" field="createdAt"></p-columnFilter>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5">Nessun risultato trovato</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-task>
+            <tr>
+              <td>{{ task.title }}</td>
+              <td>{{ task.description }}</td>
+              <td>{{ task.status }}</td>
+              <td>
+                <p-progressBar [value]="task.progress" [style]="{width: '100px'}"></p-progressBar>
+              </td>
+              <td>{{ task.project }}</td>
+              <td>{{ task.startDate }}</td>
+              <td>{{ task.dueDate }}</td>
+              <td>{{ task.createdAt}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+  </div>
+
+

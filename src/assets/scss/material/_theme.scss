@@ -1,0 +1,108 @@
+@use "palette";
+@use "@angular/material" as mat;
+
+@include mat.core();
+$my-primary: mat.define-palette(palette.$my-palette-primary);
+$my-accent: mat.define-palette(palette.$my-palette-accent);
+$my-warn: mat.define-palette(palette.$my-palette-warn);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(
+        $font-family: 'Poppins',
+        $body-1: mat.define-typography-level(14px, 20px, 400),
+    ),
+  )
+);
+
+@include mat.all-component-themes($my-theme);
+
+.mat-mdc-form-field {
+    width: 100%;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border-bottom-color: #edf1f7;
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid) {
+    .mdc-notched-outline__leading, 
+    .mdc-notched-outline__notch, 
+    .mdc-notched-outline__trailing {
+        border-color: #edf1f7;
+    }
+}
+.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not(.mdc-text-field--invalid):hover {
+    &:hover {
+        .mdc-notched-outline {
+            .mdc-notched-outline__leading, .mdc-notched-outline__notch, .mdc-notched-outline__trailing {
+                border-color: #edf1f7;
+            }
+        }
+    }
+}
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+.mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.mat-mdc-slide-toggle {
+    .mdc-switch {
+        width: 46px !important;
+        .mdc-switch__handle-track {
+            width: 22px !important;
+            left: 2px !important;
+        }
+        .mdc-switch__track {
+            height: 24px !important;
+            border-radius: 12px !important;
+        }
+        .mdc-switch__icons {
+            display: none !important;
+        }
+    }
+    &.success-switch {
+        --mdc-switch-unselected-focus-track-color: #A8A8A8 !important;
+        --mdc-switch-unselected-hover-track-color: #A8A8A8 !important;
+        --mdc-switch-unselected-pressed-track-color: #A8A8A8 !important;
+        --mdc-switch-unselected-track-color: #A8A8A8 !important;
+        --mdc-switch-selected-focus-track-color: #449329 !important;
+        --mdc-switch-selected-hover-track-color: #449329 !important;
+        --mdc-switch-selected-pressed-track-color: #449329 !important;
+        --mdc-switch-selected-track-color: #449329 !important;
+        --mdc-switch-selected-handle-color: white !important;
+        --mdc-switch-selected-focus-handle-color: white !important;
+        --mdc-switch-selected-hover-handle-color: white !important;
+        --mdc-switch-selected-pressed-handle-color: white !important;
+        --mdc-switch-unselected-handle-color: white !important;
+        --mdc-switch-unselected-focus-handle-color: white !important;
+        --mdc-switch-unselected-hover-handle-color: white !important;
+        --mdc-switch-unselected-pressed-handle-color: white !important;
+        --mdc-switch-selected-focus-state-layer-color: #449329 !important;
+        --mdc-switch-selected-hover-state-layer-color: #449329 !important;
+        --mdc-switch-selected-pressed-state-layer-color: #449329 !important;
+    }
+}
+
+.mat-datepicker-toggle {
+    .mat-mdc-icon-button.mat-mdc-button-base {
+        width: 32px;
+        height: 32px;
+        padding: 2px;
+    }
+    .mat-mdc-icon-button .mat-mdc-button-touch-target {
+        width: 24px;
+        height: 24px;
+    }
+}

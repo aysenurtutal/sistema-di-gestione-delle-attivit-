@@ -1,0 +1,62 @@
+/*.dashboard {*/
+/*  background-color: #c5d7ee9e;*/
+/*}*/
+.stats{
+  display: flex;
+  flex-direction: column;
+}
+.card-top {
+  margin-left:20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.card-chart {
+  display: inline-flex;
+  margin-left:20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  height: 435px;
+}
+.stats ::ng-deep .p-card .p-card-content {
+  display: inline-flex;
+  /*padding:0;*/
+}
+.stats ::ng-deep .p-card .p-card-body{
+  /*text-align: center;*/
+  max-width: 267px;
+  max-height: 155px;
+}
+
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  table {
+    font-size: 0.9rem; /* Küçük ekranlarda tablo font boyutunu küçült */
+  }
+}
+table {
+  width: 100%;
+  min-width: 5rem; /* Tablo genişliği için kontrol */
+  overflow-x: auto;
+}
+:host {
+  display: block;
+  min-width: 5rem; /* Sayfa genelinde minimum genişlik */
+  /*overflow-x: auto; !* Taşmayı engellemek için yatay kaydırma *!*/
+  overflow: hidden;
+}
+
+.card-alerts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.card-table{
+  margin-left: 20px;
+}
+::ng-deep .p-column-filter-row p-columnfilterformelement {
+  width: 90px;
+}

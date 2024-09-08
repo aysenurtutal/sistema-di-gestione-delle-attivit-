@@ -1,0 +1,200 @@
+ <div class="projects">
+   <p-toolbar *ngIf="!config?.data" class="col-12">
+     <ng-template pTemplate="left">
+       <div class="search-container">
+              <span class="p-input-icon-left" style="max-width: 400px;">
+<!--                  <i class="pi pi-search" style="margin-right: 5px;"></i>-->
+                 <input style="background-color: white;border-color: #e3d6d6;height:30px" pInputText type="text"
+                        (input)="filterGlobal($event, 'contains')"
+                        placeholder="Search"
+                        class="search-input"/>
+              </span>
+       </div>
+     </ng-template>
+
+     <ng-template pTemplate="right" >
+       <div class="custom-paginator-top ml-3">
+         <div class="p-d-flex p-jc-between p-ai-center">
+           <div class="p-d-flex p-ai-center">
+             <label style="font-size: 16px; font-weight:600" for="rowsPerPage">Result: </label>
+             <p-dropdown id="rowsPerPage" [options]="[5, 10, 20, 50]" [(ngModel)]="dt.rows"></p-dropdown>
+           </div>
+         </div>
+       </div>
+     </ng-template>
+   </p-toolbar>
+   <p-table #dt [rows]="10"  [paginator]="true" [globalFilterFields]="['title', 'description', 'status', 'project', 'tag', 'progress', 'createdAt', 'startDate', 'dueDate']"
+            [value]="tasks" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Risultati {first} a {last} di {totalRecords}" [showCurrentPageReport]="true"
+            styleClass="p-datatable-gridlines" scrollHeight="450px" scrollable="true"
+            [tableStyle]="{ 'min-width': '25rem'}">
+     <ng-template pTemplate="header">
+       <tr>
+         <th style="width:10%" pSortableColumn="title">
+           Title <p-sortIcon field="title" />
+         </th>
+         <th style="width:20%" pSortableColumn="description">
+           Description <p-sortIcon field="description" />
+         </th>
+         <th style="width:10%" pSortableColumn="project">
+           Project <p-sortIcon field="project" />
+         </th>
+         <th style="width:10%" pSortableColumn="status">
+           Status <p-sortIcon field="status" />
+         </th>
+         <th style="width:10%" pSortableColumn="tag">
+           Tag <p-sortIcon field="tag" />
+         </th>
+         <th style="width:10%" pSortableColumn="progress">
+           Progress <p-sortIcon field="progress" />
+         </th>
+         <th style="width:10%" pSortableColumn="createdAt">
+           CreatedAt <p-sortIcon field="createdAt" />
+         </th>
+         <th style="width:10%" pSortableColumn="startDate">
+           StartDate <p-sortIcon field="startDate" />
+         </th>
+         <th style="width:10%" pSortableColumn="dueDate">
+           DueDate <p-sortIcon field="dueDate" />
+         </th>
+       </tr>
+       <tr>
+         <th>
+           <p-columnFilter type="text" field="title" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="description" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="project" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="status" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="tag" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="progress" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="createdAt" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="startDate" [showClearButton]="false" />
+         </th>
+         <th>
+           <p-columnFilter type="text" field="dueDate" [showClearButton]="false" />
+         </th>
+       </tr>
+     </ng-template>
+     <ng-template pTemplate="body" let-task let-editing="editing">
+       <tr [ngClass]="{
+       'red-row': task.progress <= 33,
+       'orange-row': task.progress > 33 && task.progress <= 80,
+       'green-row': task.progress > 80
+       }">
+         <td [pEditableColumn]="task.title" pEditableColumnField="title">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText type="text" [(ngModel)]="task.title" (ngModelChange)="updateTask(task)" />
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.title }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.description" pEditableColumnField="description">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText type="text" [(ngModel)]="task.description" (ngModelChange)="updateTask(task)"  required />
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.description }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.project" pEditableColumnField="project">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText  type="text" [(ngModel)]="task.project"  (ngModelChange)="updateTask(task)" required/>
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.project }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.status" pEditableColumnField="status">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText  type="text" [(ngModel)]="task.status" (ngModelChange)="updateTask(task)" required/>
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.status }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.tag" pEditableColumnField="tag">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText  type="text" [(ngModel)]="task.tag" (ngModelChange)="updateTask(task)" required/>
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.tag }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.progress" pEditableColumnField="progress">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <p-progressBar [value]="task.progress" [style]="{width: '100px'}"></p-progressBar>
+             </ng-template>
+             <ng-template pTemplate="output">
+               <p-progressBar [value]="task.progress" [style]="{width: '100px'}"></p-progressBar>
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.createdAt" pEditableColumnField="createdAt">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText  type="text" [(ngModel)]="task.createdAt" (ngModelChange)="updateTask(task)" required/>
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.createdAt }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.startDate" pEditableColumnField="startDate">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText  type="text" [(ngModel)]="task.startDate" (ngModelChange)="updateTask(task)" required/>
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.startDate }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <td [pEditableColumn]="task.dueDate" pEditableColumnField="dueDate">
+           <p-cellEditor>
+             <ng-template pTemplate="input">
+               <input pInputText  type="text" [(ngModel)]="task.dueDate" (ngModelChange)="updateTask(task)" required/>
+             </ng-template>
+             <ng-template pTemplate="output">
+               {{ task.dueDate }}
+             </ng-template>
+           </p-cellEditor>
+         </td>
+         <!--        <td [pEditableColumn]="product.price" pEditableColumnField="price">-->
+         <!--          <p-cellEditor>-->
+         <!--            <ng-template pTemplate="input">-->
+         <!--              <input pInputText type="text" [(ngModel)]="product.price" (keydown.enter)="onEdit($event)" />-->
+         <!--            </ng-template>-->
+         <!--            <ng-template pTemplate="output">-->
+         <!--              {{ product.price | currency : 'USD' }}-->
+         <!--            </ng-template>-->
+         <!--          </p-cellEditor>-->
+         <!--        </td>-->
+       </tr>
+     </ng-template>
+   </p-table>
+ </div>

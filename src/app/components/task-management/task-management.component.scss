@@ -1,0 +1,125 @@
+.p-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.kanban-board {
+  padding: 1rem;
+}
+
+.p-card {
+  margin-bottom: 1rem;
+}
+
+.card-content {
+  padding: 1rem;
+}
+
+.unstarted {
+  border-left: 4px solid blue;
+}
+
+.in-progress {
+  border-left: 4px solid orange;
+}
+
+.completed {
+  border-left: 4px solid green;
+}
+.taskCard{
+  max-width: 400px;
+  width: 400px;
+  max-height: 600px;
+  overflow: overlay;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height for centering */
+}
+.urgent-task {
+    span {
+      background-color: red !important;
+      color: white !important;
+    }
+  }
+
+  .normal-task {
+    span {
+      background-color: green !important;
+      color: white !important;
+    }
+  }
+
+.p-col {
+  max-height: 500px;
+  width:390px;
+  overflow-y: auto;
+  margin-right: 30px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Yarı saydam siyah arka plan
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // Diğer içeriklerin üstünde görünmesi için
+}
+.add-button {
+  width: 100%;
+  height: 35px;
+  align-self: center;
+  margin-top: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+  //background-color: rgb(34,197,94);
+  //border-color: rgb(34,197,94);
+}
+.p-card .p-card-body {
+  padding: 0 ;
+}
+p {
+  color:black;
+  font-weight: 500;
+}
+.card-button{
+  color:green;
+}
+.p-progressbar {
+  height: 30px;
+}
+.addButton .p-button {
+  width: 100%
+}
+
+@media (max-width: 580px) and (min-width: 400px){
+  .p-col {
+    width: 220px;
+  }
+  .editButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+@media (max-width: 400px) and (min-width: 200px){
+  .p-col {
+    width: 150px;
+  }
+  .editButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.editButtons {
+  display: flex;
+  gap: 10px;
+}

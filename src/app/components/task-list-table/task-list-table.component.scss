@@ -1,0 +1,41 @@
+:host ::ng-deep .p-cell-editing {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.projects {
+  min-width: 5rem;
+}
+:host {
+  display: block;
+  min-width: 5rem; /* Sayfa genelinde minimum genişlik */
+  //overflow-x: auto; /* Taşmayı engellemek için yatay kaydırma */
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  min-width: 5rem; /* Tablo genişliği için kontrol */
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  table {
+    font-size: 0.9rem; /* Küçük ekranlarda tablo font boyutunu küçült */
+  }
+}
+.red-row {
+  background-color: #ea1717e3  !important; /* Change to your preferred red color */
+}
+
+.orange-row {
+  background-color: #ffe200a3 !important; /* Change to your preferred orange color */
+}
+
+.green-row {
+  background-color: #83ca64c7 !important; /* Change to your preferred green color */
+}

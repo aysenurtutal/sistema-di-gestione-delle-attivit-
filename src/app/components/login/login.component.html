@@ -1,0 +1,29 @@
+<div class="login-container p-d-flex p-jc-center p-ai-center p-flex-column p-mt-6">
+  <div class="p-card p-p-4 p-shadow-6 p-mb-5" style="height: 350px; text-align: center;">
+<!--    <h2 class="p-text-bold" style="color: gray;">MY TASK MANAGEMENT SYSTEM</h2>-->
+    <h2 class="p-text-bold mt-4" style="color: gray;">LOGIN</h2>
+
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <div class="p-field p-mb-3">
+        <label for="username" class="p-text-bold">Username</label>
+        <input [(ngModel)]="username" id="username" name="username" pInputText required type="text"
+               class="p-inputtext p-component p-d-block mb-4" placeholder="Enter your username">
+      </div>
+
+      <div class="p-field p-mb-3">
+        <label for="password" class="p-text-bold">Password</label>
+        <input [(ngModel)]="password" id="password" name="password" pPassword required type="password"
+               placeholder="Enter your password" />
+      </div>
+
+      <div class="p-d-flex p-jc-center p-mt-4">
+        <button [disabled]="!username || !password" class="p-button p-button-rounded p-button-primary p-button-lg"
+                label="Login" pButton>
+          <span class="pi pi-sign-in mr-4"></span>
+          <span>Login</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "title": "Send out newsletter",
+    "description": "Email marketing campaign",
+    "status": "unstarted",
+    "tag": "Updates",
+    "project": "Work",
+    "progress": 33,
+    "createdAt": "01-08-2024",
+    "startDate": "10-08-2024",
+    "dueDate": "20-08-2024",
+    "notes": "Collect content from all departments."
+  },
+  {
+    "id": 2,
+    "title": "Launch new product offering",
+    "description": "New software release",
+    "status": "in-progress",
+    "tag": "Urgent",
+    "project": "Work",
+    "progress": 66,
+    "createdAt": "01-08-2024",
+    "startDate": "10-08-2024",
+    "dueDate": "20-08-2024",
+    "notes": "Finalize testing and prepare marketing materials."
+  },
+  {
+    "id": 3,
+    "title": "Market expansion",
+    "description": "Expand to a new market",
+    "status": "completed",
+    "tag": "Urgent",
+    "project": "Home",
+    "progress": 100,
+    "createdAt": "01-08-2024",
+    "startDate": "10-08-2024",
+    "dueDate": "20-08-2024",
+    "notes": "Successfully entered the new market and established partnerships."
+  },
+  {
+    "id": 4,
+    "title": "Personal Development",
+    "description": "Courses",
+    "status": "in-progress",
+    "tag": "Updates",
+    "project": "Personal",
+    "progress": 66,
+    "createdAt": "01-08-2024",
+    "startDate": "10-08-2024",
+    "dueDate": "20-08-2024",
+    "notes": "Continue"
+  }
+]

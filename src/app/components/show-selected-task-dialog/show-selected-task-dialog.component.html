@@ -1,0 +1,48 @@
+<!-- VIEW POP UP - EYE-ICON-->
+
+  <div class="vertical-table">
+    <table *ngIf="task">
+      <tbody>
+      <tr>
+        <td readonly="true"  class="field">Title</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.title}}</td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Description</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.description}}</td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Progress</td>
+        <td readonly="true"  style="white-space: normal;">
+          <p-progressBar [value]="task.progress" [style]="{width: '100px'}"></p-progressBar>
+        </td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Tag</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.tag}}</td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Project</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.project}}</td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Start Date</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.startDate}}</td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Due Date</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.dueDate | date : 'dd-MM-yyyy'}}</td>
+      </tr>
+      <tr>
+        <td readonly="true"  class="field">Created Date</td>
+        <td readonly="true"  style="white-space: normal;">{{task?.createdAt}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+<p-footer>
+  <div style="text-align: center">
+    <button pButton icon="pi pi-check" label="Okay" class="p-button-primary" (click)="closeDialog()"></button>
+  </div>
+</p-footer>

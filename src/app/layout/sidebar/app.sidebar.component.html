@@ -1,0 +1,18 @@
+<p-menu [model]="items" class="customMenu" styleClass="w-full md:w-15rem">
+  <ng-template pTemplate="start">
+    <img ngSrc="assets/sidenav-logo.png" height="90" width="90" priority>
+  </ng-template>
+
+  <ng-template pTemplate="submenuheader" let-item>
+    <span class="text-primary font-bold">{{ item.label }}</span>
+  </ng-template>
+
+  <ng-template pTemplate="item" let-item>
+    <!-- Replace the default anchor with a routerLink -->
+    <a pRipple class="flex align-items-center p-menuitem-link" [routerLink]="item.routerLink">
+      <span [class]="item.icon"></span>
+      <span class="ml-2">{{ item.label }}</span>
+    </a>
+  </ng-template>
+</p-menu>
+

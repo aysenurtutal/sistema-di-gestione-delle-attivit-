@@ -1,0 +1,46 @@
+  <form [formGroup]="taskForm">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="title">Task Title</label>
+        <textarea id="title" pInputTextarea formControlName="title"></textarea>
+      </div>
+      <div class="p-field">
+        <label for="description">Task Description</label>
+        <textarea id="description" pInputTextarea formControlName="description"></textarea>
+      </div>
+      <div class="p-field">
+        <label for="status">Status</label>
+        <p-dropdown [options]="statuses" formControlName="status"></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="tag">Tag</label>
+        <p-dropdown [options]="tags" formControlName="tag"></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="project">Project</label>
+        <p-dropdown [options]="projects" formControlName="project"></p-dropdown>
+      </div>
+      <div class="p-field">
+        <label for="progress">Progress</label>
+        <p-inputNumber formControlName="progress" [min]="0" [max]="100"></p-inputNumber>
+      </div>
+      <div class="p-field">
+        <label for="startDate">Start Date</label>
+        <p-calendar [showIcon]="true" formControlName="startDate" dateFormat="dd-mm-yy"  />
+      </div>
+      <div class="p-field">
+        <label for="dueDate">Due Date</label>
+        <p-calendar [showIcon]="true" formControlName="dueDate" dateFormat="dd-mm-yy" />
+      </div>
+      <div class="p-field">
+        <label for="notes">Notes</label>
+        <p-editor formControlName="notes" [style]="{ height: '240px' }" />
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <div style="text-align: center">
+      <button pButton icon="pi pi-times" label="Cancel" class="p-button-secondary mr-2" (click)="closeDialog()"></button>
+      <button pButton icon="pi pi-check" label="Save" class="p-button-primary"  (click)="saveTask()"></button>
+    </div>
+  </p-footer>

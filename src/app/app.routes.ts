@@ -1,3 +1,30 @@
 import { Routes } from '@angular/router';
+import {AppLayoutComponent} from "./layout/app.layout.component";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {AuthGuard} from "./core/guard/auth.guard";
+import {TaskDialogComponent} from "./components/task-dialog/task-dialog.component";
+import {LoginComponent} from "./components/login/login.component";
+import {AccessComponent} from "./components/auth/access/access.component";
+import {ErrorComponent} from "./components/auth/error/error.component";
+import {NotfoundComponent} from "./components/auth/notfound/notfound.component";
+import {TaskManagementComponent} from "./components/task-management/task-management.component";
+import {TaskListTableComponent} from "./components/task-list-table/task-list-table.component";
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '', component: AppLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+      {path: 'task-management', component: TaskManagementComponent, canActivate: [AuthGuard]},
+      {path: 'task-list-table', component: TaskListTableComponent, canActivate: [AuthGuard]},
+      ]
+  },
+  {path: 'login', component: LoginComponent},
+  {path: 'access', component: AccessComponent},
+  {path: 'error', component: ErrorComponent},
+  {path: 'notFound', component: NotfoundComponent},
+
+  // { path: '**', redirectTo: '/notfound'},
+  {path: '**', redirectTo: 'login'},
+];

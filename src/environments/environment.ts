@@ -6,9 +6,9 @@ export const environment = {
   production: false,
   uat: false,
   development: true,
-  baseRoot: 'https://harmonyuatapi.caretta.net/',
-  apiRoot: 'https://harmonyuatapi.caretta.net/api/',
-  domain: 'http://localhost:4545/',
+  domain: 'https://arpab.tagpz.it/',
+  domainForLocalhost: 'https://arpab.tagpz.it/',
+  apiRoot: 'https://arpab.tagpz.it/api/',
   defaultImage: './assets/img/default.png',
 };
 

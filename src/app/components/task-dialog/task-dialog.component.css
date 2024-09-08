@@ -1,0 +1,21 @@
+.p-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 500px;
+  min-width: 200px;
+  max-width: 700px;
+}
+
+label {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 550;
+
+}
+
+textarea {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
