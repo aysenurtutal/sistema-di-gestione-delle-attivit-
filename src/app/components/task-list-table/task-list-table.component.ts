@@ -3,7 +3,7 @@ import {Table, TableModule} from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import {ApiService} from "../../api.service";
-import {TaskManagementDto} from "../task-management/task-management-dto";
+import {TaskManagementDto} from "../../core-file/models/task-management-dto";
 import {FormsModule} from "@angular/forms";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {DropdownModule} from "primeng/dropdown";
@@ -28,6 +28,7 @@ export class TaskListTableComponent implements OnInit {
   taskLocalStorageList: TaskManagementDto[] = [];
   isLoading: boolean = true;
   rowsPerPage: number = 10;
+
   constructor(private apiService: ApiService,
               @Optional() public ref: DynamicDialogRef,
               @Optional() public config: DynamicDialogConfig,) {}
@@ -35,6 +36,7 @@ export class TaskListTableComponent implements OnInit {
   ngOnInit() {
     this.loadTasks();
   }
+
   loadTasks() {
     this.isLoading = true;
 
@@ -66,14 +68,15 @@ export class TaskListTableComponent implements OnInit {
       }
     },1000)
   }
+
   filterGlobal(event: Event, matchMode: string) {
     const inputElement = event.target as HTMLInputElement;
 
-    // dt tanımlıysa filterGlobal çağrısını yap
     if (this.dt) {
       this.dt.filterGlobal(inputElement.value, matchMode);
     }
   }
+
   // Method to update a task
   updateTask(updatedTask: TaskManagementDto) {
     const index = this.tasks.findIndex(task => task.id === updatedTask.id);
@@ -86,9 +89,11 @@ export class TaskListTableComponent implements OnInit {
       localStorage.setItem('tasks', JSON.stringify(this.taskLocalStorageList)); // Sync with local storage
     }
   }
+
   updateRowsPerPage() {
     if (this.dt) {
-      this.dt.rows = this.rowsPerPage;  // `dt` tablosunun satır sayısını güncelle
+      this.dt.rows = this.rowsPerPage;
     }
   }
+
 }

@@ -8,8 +8,6 @@ import {NgIf, NgOptimizedImage} from "@angular/common";
 import {MenuItem} from "primeng/api";
 import {BadgeModule} from "primeng/badge";
 import {MenuModule} from "primeng/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
 
 @Component({
     selector: 'app-sidebar',

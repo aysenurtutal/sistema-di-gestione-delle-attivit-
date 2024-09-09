@@ -33,14 +33,6 @@
   border-left: 4px solid green;
 }
 
-
-.spinner-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; /* Full viewport height for centering */
-}
 .urgent-task {
     span {
       background-color: red !important;
@@ -48,12 +40,12 @@
     }
   }
 
-  .normal-task {
-    span {
-      background-color: green !important;
-      color: white !important;
-    }
+.normal-task {
+  span {
+    background-color: green !important;
+    color: white !important;
   }
+}
 
 .p-col {
   max-height: 500px;
@@ -74,6 +66,7 @@
   align-items: center;
   z-index: 1000; // Diğer içeriklerin üstünde görünmesi için
 }
+
 .add-button {
   width: 100%;
   height: 35px;
@@ -84,9 +77,11 @@
   //background-color: rgb(34,197,94);
   //border-color: rgb(34,197,94);
 }
+
 .p-card .p-card-body {
   padding: 0 ;
 }
+
 p {
   color:black;
   font-weight: 500;
@@ -100,7 +95,12 @@ p {
 .addButton .p-button {
   width: 100%
 }
+.editButtons {
+  display: flex;
+  gap: 10px;
+}
 
+//For responsive screens
 @media (max-width: 580px) and (min-width: 400px){
   .editButtons {
     display: flex;
@@ -122,16 +122,3 @@ p {
     flex-direction: column;
   }
 }
-
-.editButtons {
-  display: flex;
-  gap: 10px;
-}
-
-
-//:host {
-//  display: block;
-//  min-width: 5rem; /* Sayfa genelinde minimum genişlik */
-//  //overflow-x: auto; /* Taşmayı engellemek için yatay kaydırma */
-//  overflow: hidden;
-//}

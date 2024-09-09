@@ -7,8 +7,6 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-// import { ToasterService } from 'src/app/shared/services/toaster.service';
-// import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
@@ -17,7 +15,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class TokenInterceptor implements HttpInterceptor {
   private authLocalStorageToken: string = 'token';
   private spinnerCounter:number = 0;
-  private selectedYear:string = '';
 
   httpStatusCodes: { code: number; message: string }[] = [
     { code: 301, message: 'HTTP_STATUS_CODE.301'},
@@ -36,15 +33,12 @@ export class TokenInterceptor implements HttpInterceptor {
   ];
 
   constructor(
-    // private toasterService: ToasterService,
-    // private translateService: TranslateService,
     private spinner: NgxSpinnerService,
   ) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     const token = localStorage.getItem(this.authLocalStorageToken);
-    // const year = '2024';
     if (token) {
     }
     this.spinner.show();

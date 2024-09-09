@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
 import {AppLayoutComponent} from "./layout/app.layout.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {AuthGuard} from "./core/guard/auth.guard";
-import {TaskDialogComponent} from "./components/task-dialog/task-dialog.component";
+import {AuthGuard} from "./core-file/guard/auth.guard";
 import {LoginComponent} from "./components/login/login.component";
-import {AccessComponent} from "./components/auth/access/access.component";
-import {ErrorComponent} from "./components/auth/error/error.component";
-import {NotfoundComponent} from "./components/auth/notfound/notfound.component";
+import {AccessComponent} from "./auth-file/access/access.component";
+import {ErrorComponent} from "./auth-file/error/error.component";
+import {NotfoundComponent} from "./auth-file/notfound/notfound.component";
 import {TaskManagementComponent} from "./components/task-management/task-management.component";
 import {TaskListTableComponent} from "./components/task-list-table/task-list-table.component";
 

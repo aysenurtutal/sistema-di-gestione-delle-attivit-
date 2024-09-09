@@ -9,11 +9,8 @@ import {FileUploadModule} from "primeng/fileupload";
 import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {ToolbarModule} from "primeng/toolbar";
-import {TaskManagementDto} from "../task-management/task-management-dto";
-import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 import {Footer} from "primeng/api";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
-import {Router} from "@angular/router";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {TaskListTableComponent} from "../task-list-table/task-list-table.component";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
@@ -37,7 +34,6 @@ import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
     ScrollPanelModule,
     NgxSkeletonLoaderModule,
     NgIf
-
   ]
 })
 export class DashboardComponent implements OnInit {
@@ -62,7 +58,6 @@ export class DashboardComponent implements OnInit {
   updatedTasks: number = 0;
   dueTasks: number = 0;
 
-  workload: any[] = [];
   data: any;
 
   options: any;
@@ -71,9 +66,8 @@ export class DashboardComponent implements OnInit {
   selectedTask: any;
   ref!: DynamicDialogRef;
   isLoading: boolean = true;
-  // options: any = {completed: this.completedTasks, inProgres: this.inProgressTasks, toDo: this.toDoTasks}
-  constructor(private dialogService: DialogService,
-              private router: Router) {}
+
+  constructor(private dialogService: DialogService) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -148,7 +142,8 @@ export class DashboardComponent implements OnInit {
   handleCompletedClick() {
     this.openTaskDialog(this.completedTaskList);
   }
-  // Dashboard verilerini hesapla
+
+  // Calculate Dashboard Data
   calculateDashboardData() {
     this.totalTasks = this.tasks.length;
     this.completedTaskList = this.tasks.filter(x => x.status == 'completed');
@@ -158,7 +153,7 @@ export class DashboardComponent implements OnInit {
     this.toDoTaskList = this.tasks.filter(task => task.status === 'unstarted');
     this.toDoTasks = this.tasks.filter(task => task.status === 'unstarted').length;
 
-    // Yeni, Güncellenmiş ve Vadesi Yaklaşan Görevleri Hesapla
+    // Calculate New, Updated and Upcoming Tasks
     this.newTaskList = this.tasks.filter(task => this.isNew(task));
     this.newTasks = this.tasks.filter(task => this.isNew(task)).length;
     this.updatedTaskList = this.tasks.filter(task => this.isUpdated(task));
@@ -167,21 +162,21 @@ export class DashboardComponent implements OnInit {
     this.dueTasks = this.tasks.filter(task => this.isDue(task)).length;
   }
 
-  // Yeni görevlerin hesaplanması
+  // Calculation of new tasks
   isNew(task: any): boolean {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     return new Date(task.createdAt) > oneWeekAgo;
   }
 
-  // Güncellenmiş görevlerin hesaplanması
+  // Calculation of updated tasks
   isUpdated(task: any): boolean {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     return new Date(task.startDate) > oneWeekAgo;
   }
 
-  // Bitmek üzere olan görevlerin hesaplanması
+  // Calculating tasks that are about to be completed
   isDue(task: any): boolean {
     const nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
@@ -191,7 +186,7 @@ export class DashboardComponent implements OnInit {
   filterGlobal(event: Event, matchMode: string) {
     const inputElement = event.target as HTMLInputElement;
 
-    // dt tanımlıysa filterGlobal çağrısını yap
+    // If dt is defined, call filterGlobal
     if (this.dt) {
       this.dt.filterGlobal(inputElement.value, matchMode);
     }
@@ -215,39 +210,5 @@ export class DashboardComponent implements OnInit {
         // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Data Updated', life: 3000 });
       });
     }
-  }
-  // openTaskDialog(task: TaskManagementDto, title: string) {
-  //   // this.task = { ...task };
-  //   this.ref = this.dialogService.open(ShowSelectedTaskDialogComponent, {
-  //     header: title,
-  //     width: '37%',
-  //     contentStyle: { overflow: 'auto' },
-  //     breakpoints: { '1199px': '55vw', '575px': '90vw' },
-  //     templates: {
-  //       footer: Footer
-  //     },
-  //     data: { title: title, task: task },
-  //   });
-  //   this.ref.onClose.subscribe((result) => {
-  //     // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Data Updated', life: 3000 });
-  //   });
-  // }
-  openEditPopup(task: TaskManagementDto, title: string) {
-    this.selectedTask = { ...task }; // Cloning task object to prevent direct modifications
-    this.ref = this.dialogService.open(TaskDialogComponent, {
-      header: title,
-      width: '37%',
-      contentStyle: { overflow: 'auto' },
-      breakpoints: { '1199px': '75vw', '575px': '90vw' },
-      templates: {
-        footer: Footer
-      },
-      data: { title: title, task: task },
-    });
-    this.ref.onClose.subscribe((result) => {
-      const tasksFromStorage = localStorage.getItem('tasks');
-      this.tasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
-      // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Data Updated', life: 3000 });
-    });
   }
 }

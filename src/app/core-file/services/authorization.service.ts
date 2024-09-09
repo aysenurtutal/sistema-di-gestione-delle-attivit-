@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthorizationService {
@@ -19,8 +18,6 @@ export class AuthorizationService {
   removeAuthentication(): void {
     localStorage.clear();
     location.href = 'https://todolist2-6eb0e.web.app/login';
-    // location.href = environment.domainForLocalhost;
-    // // degıstır deploy alırken domain olarak
   }
 
 }

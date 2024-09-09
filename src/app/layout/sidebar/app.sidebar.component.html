@@ -8,7 +8,6 @@
   </ng-template>
 
   <ng-template pTemplate="item" let-item>
-    <!-- Replace the default anchor with a routerLink -->
     <a pRipple class="flex align-items-center p-menuitem-link" [routerLink]="item.routerLink">
       <span [class]="item.icon"></span>
       <span class="ml-2">{{ item.label }}</span>

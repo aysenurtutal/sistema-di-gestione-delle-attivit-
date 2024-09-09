@@ -1,6 +1,6 @@
-// src/app/services/task-storage.service.ts
+
 import { Injectable } from '@angular/core';
-import {TaskManagementDto} from "../../components/task-management/task-management-dto";
+import {TaskManagementDto} from "../models/task-management-dto";
 
 
 @Injectable({

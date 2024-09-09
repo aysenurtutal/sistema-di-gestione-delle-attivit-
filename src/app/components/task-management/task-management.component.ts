@@ -5,8 +5,8 @@ import {CommonModule, NgClass, NgForOf, NgIf} from "@angular/common";
 import {DropdownModule} from "primeng/dropdown";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ApiService} from "../../api.service";
-import {TaskManagementDto} from "./task-management-dto";
-import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
+import {TaskManagementDto} from "../../core-file/models/task-management-dto";
+import {TaskDialogComponent} from "../../core-file/modals/task-dialog(edit-create)/task-dialog.component";
 import {CardModule} from "primeng/card";
 import {ProgressBarModule} from "primeng/progressbar";
 import {TagModule} from "primeng/tag";
@@ -14,12 +14,11 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {ConfirmationService, Footer, MessageService} from "primeng/api";
 import {DialogService, DynamicDialogModule, DynamicDialogRef} from "primeng/dynamicdialog";
 import {SpinnerModule} from "primeng/spinner";
-import {TaskStorageService} from "../../core/services/task-storage.service";
+import {TaskStorageService} from "../../core-file/services/task-storage.service";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {DragDropModule} from "primeng/dragdrop";
 import {CdkDropList} from "@angular/cdk/drag-drop";
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import {ShowSelectedTaskDialogComponent} from "../show-selected-task-dialog/show-selected-task-dialog.component";
+import {ShowSelectedTaskDialogComponent} from "../../core-file/modals/show-selected-task-dialog/show-selected-task-dialog.component";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 
 @Component({
@@ -108,6 +107,7 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
           (task.project && task.project.toLowerCase().includes(searchTerm.toLowerCase())))
     ));
   }
+
   openCreatePopup(title: string) {
     this.isLoading = true;
     const lastUserId = this.tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0);
@@ -165,6 +165,7 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
       // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Data Updated', life: 3000 });
     });
   }
+
   deleteTask(taskId: number) {
     if(taskId){
       this.confirmationService.confirm({
@@ -191,18 +192,12 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
 
   onTaskDrop(newStatus: string) {
     if (this.draggedTask) {
-      // Görevin durumunu güncelle
       this.draggedTask.status = newStatus;
-
-      // localStorage'a güncellenen görevleri kaydet
       this.saveTasksToLocalStorage();
-
-      // Sürüklenen görevi temizle
       this.draggedTask = null;
     }
   }
 
-  // Görevleri localStorage'a kaydet
   saveTasksToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
@@ -214,9 +209,11 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
   dragEnd() {
     this.draggedTask = null;
   }
+
   ngOnDestroy() {
     if (this.ref) {
       this.ref.close();
     }
   }
+
 }

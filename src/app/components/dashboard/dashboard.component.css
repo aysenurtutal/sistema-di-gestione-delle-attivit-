@@ -1,6 +1,3 @@
-/*.dashboard {*/
-/*  background-color: #c5d7ee9e;*/
-/*}*/
 .stats{
   display: flex;
   flex-direction: column;
@@ -10,14 +7,6 @@
   margin-right: 20px;
   margin-bottom: 20px;
 }
-
-@media (max-width: 450px) and (min-width: 200px){
-  .card-top{
-    width: 100%;
-  }
-
-}
-
 .card-chart {
   display: inline-flex;
   margin-left:20px;
@@ -27,36 +16,21 @@
 }
 .stats ::ng-deep .p-card .p-card-content {
   display: inline-flex;
-  /*padding:0;*/
 }
 .stats ::ng-deep .p-card .p-card-body{
-  /*text-align: center;*/
   max-width: 267px;
   max-height: 155px;
 }
-
-
-@media (max-width: 768px) {
-  :host {
-    padding: 1rem;
-  }
-
-  table {
-    font-size: 0.9rem; /* Küçük ekranlarda tablo font boyutunu küçült */
-  }
-}
 table {
   width: 100%;
-  min-width: 5rem; /* Tablo genişliği için kontrol */
+  min-width: 5rem;
   overflow-x: auto;
 }
 :host {
   display: block;
-  min-width: 5rem; /* Sayfa genelinde minimum genişlik */
-  /*overflow-x: auto; !* Taşmayı engellemek için yatay kaydırma *!*/
+  min-width: 5rem;
   overflow: hidden;
 }
-
 .card-alerts {
   display: flex;
   flex-direction: column;
@@ -67,4 +41,22 @@ table {
 }
 ::ng-deep .p-column-filter-row p-columnfilterformelement {
   width: 90px;
+}
+
+/* For Responsive Screens*/
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 450px) and (min-width: 200px){
+  .card-top{
+    width: 100%;
+  }
 }

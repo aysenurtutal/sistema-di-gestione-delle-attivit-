@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {ButtonModule} from "primeng/button";
+import { NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
 @Component({
