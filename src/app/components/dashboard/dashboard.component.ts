@@ -74,9 +74,10 @@ export class DashboardComponent implements OnInit {
     this.isLoading = true;
 
     setTimeout(() => {
-      const storedTasks = localStorage.getItem('tasks');
+      const tasksFromStorage = localStorage.getItem('tasks');
+      const storedTasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
       if (storedTasks) {
-        this.tasks = JSON.parse(storedTasks);
+        this.tasks = storedTasks;
         this.isLoading = false;
       }
 
