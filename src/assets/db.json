@@ -5,11 +5,11 @@
     "description": "Email marketing campaign",
     "status": "unstarted",
     "tag": "Updates",
-    "project": "Work",
+    "project": "Job",
     "progress": 33,
-    "createdAt": "01-08-2024",
-    "startDate": "10-08-2024",
-    "dueDate": "20-08-2024",
+    "createdAt": "08-09-2024",
+    "startDate": "8-09-2024",
+    "dueDate": "07-09-2024",
     "notes": "Collect content from all departments."
   },
   {
@@ -18,11 +18,11 @@
     "description": "New software release",
     "status": "in-progress",
     "tag": "Urgent",
-    "project": "Work",
+    "project": "Job",
     "progress": 66,
-    "createdAt": "01-08-2024",
-    "startDate": "10-08-2024",
-    "dueDate": "20-08-2024",
+    "createdAt": "09-09-2024",
+    "startDate": "8-09-2024",
+    "dueDate": "09-09-2024",
     "notes": "Finalize testing and prepare marketing materials."
   },
   {
@@ -33,9 +33,9 @@
     "tag": "Urgent",
     "project": "Home",
     "progress": 100,
-    "createdAt": "01-08-2024",
-    "startDate": "10-08-2024",
-    "dueDate": "20-08-2024",
+    "createdAt": "03-09-2024",
+    "startDate": "8-09-2024",
+    "dueDate": "12-09-2024",
     "notes": "Successfully entered the new market and established partnerships."
   },
   {
@@ -46,9 +46,9 @@
     "tag": "Updates",
     "project": "Personal",
     "progress": 66,
-    "createdAt": "01-08-2024",
-    "startDate": "10-08-2024",
-    "dueDate": "20-08-2024",
+    "createdAt": "01-09-2024",
+    "startDate": "8-09-2024",
+    "dueDate": "15-09-2024",
     "notes": "Continue"
   }
 ]

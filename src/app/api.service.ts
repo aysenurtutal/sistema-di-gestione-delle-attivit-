@@ -59,6 +59,10 @@ export class ApiService {
 
   // Update an existing task
   updateTask(task: TaskManagementDto): Observable<TaskManagementDto> {
+    // task.dueDate = formatDateToLocal(task.dueDate);
+    // task.startDate = formatDateToLocal(task.startDate);
+    // task.createdAt = formatDateToLocal(task.createdAt);
+
     const tasksFromStorage = localStorage.getItem('tasks');
     const tasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
 

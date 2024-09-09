@@ -14,6 +14,7 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {TaskListTableComponent} from "../task-list-table/task-list-table.component";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import {formatDateToLocal} from "../../core-file/utils/custom-date-format";
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -162,25 +163,34 @@ export class DashboardComponent implements OnInit {
     this.dueTasks = this.tasks.filter(task => this.isDue(task)).length;
   }
 
+  parseDate(dateString: string): Date {
+    const [day, month, year] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day); // Aylar 0 tabanlı olduğu için month-1
+  }
+
   // Calculation of new tasks
   isNew(task: any): boolean {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    return new Date(task.createdAt) > oneWeekAgo;
+
+    const createdAt = this.parseDate(task.createdAt);
+    return createdAt > oneWeekAgo;
   }
 
-  // Calculation of updated tasks
   isUpdated(task: any): boolean {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    return new Date(task.startDate) > oneWeekAgo;
+
+    const startDate = this.parseDate(task.startDate);
+    return startDate > oneWeekAgo;
   }
 
   // Calculating tasks that are about to be completed
   isDue(task: any): boolean {
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 7);
-    return new Date(task.dueDate) <= nextWeek;
+    const today = new Date();
+
+    const dueDate = this.parseDate(task.dueDate);
+    return dueDate <= today;
   }
 
   filterGlobal(event: Event, matchMode: string) {

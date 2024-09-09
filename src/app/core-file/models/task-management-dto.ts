@@ -6,7 +6,7 @@ export class TaskManagementDto {
   project?: string;
   tag?: string;
   progress?: number;
-  createdAt?: Date;
+  createdAt?: string;
   startDate?: string;
   dueDate?: string;
   notes?: string;

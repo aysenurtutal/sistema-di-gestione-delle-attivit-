@@ -17,6 +17,7 @@ import {DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef} from "primen
 import {TaskStorageService} from "../../services/task-storage.service";
 import {CalendarModule} from "primeng/calendar";
 import {EditorModule} from "primeng/editor";
+import {formatDateToLocal} from "../../utils/custom-date-format";
 
 @Component({
   selector: 'app-task-dialog(edit-create)',
@@ -81,22 +82,49 @@ export class TaskDialogComponent implements OnInit, OnChanges{
     this.task = this.config.data.task;
     this.lastUserId = this.config.data.lastUserId;
   // Get task data if available
-    if (this.task) {
-      this.taskForm.patchValue(this.task); // Populate the form if editing
-    }else {
-      this.taskForm.reset(); // Reset the form if no task data is available (for create scenario)
-    }
+    this.patchFormWithTaskValues();
+
+    this.taskForm.get('startDate')?.valueChanges.subscribe(value => {
+      if (value) {
+        const formattedDate = formatDateToLocal(value);
+        if (formattedDate !== value) {
+          this.taskForm.controls['startDate'].setValue(formattedDate, { emitEvent: false });
+        }
+      } else {
+        this.taskForm.controls['startDate'].setValue('', { emitEvent: false });
+      }
+    });
+    this.taskForm.get('dueDate')?.valueChanges.subscribe(value => {
+      if (value) {
+        const formattedDate = formatDateToLocal(value);
+        if (formattedDate !== value) {
+          this.taskForm.controls['dueDate'].setValue(formattedDate, { emitEvent: false });
+        }
+      } else {
+        this.taskForm.controls['dueDate'].setValue('', { emitEvent: false });
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.task) {
-      this.taskForm.patchValue(this.task); // Populate form for editing
-    } else {
-      this.taskForm.reset(); // Reset form for creating
-    }
     this.cdr.detectChanges();
   }
 
+  patchFormWithTaskValues() {
+    if (this.task) {
+      this.taskForm.controls['title'].setValue(this.task.title || '');
+      this.taskForm.controls['description'].setValue(this.task.description || '');
+      this.taskForm.controls['notes'].setValue(this.task.notes || '');
+      this.taskForm.controls['status'].setValue(this.task.status || '');
+      this.taskForm.controls['tag'].setValue(this.task.tag || '');
+      this.taskForm.controls['project'].setValue(this.task.project || '');
+      this.taskForm.controls['progress'].setValue(this.task.progress || '');
+      this.taskForm.controls['dueDate'].setValue(this.task.dueDate || '');
+      this.taskForm.controls['startDate'].setValue(this.task.startDate || '');
+    }else{
+      this.taskForm.reset();
+    }
+  }
 
   saveTask = () => {
     if (this.taskForm.valid) {
