@@ -109,7 +109,6 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
   }
 
   openCreatePopup(title: string) {
-    this.isLoading = true;
     const lastUserId = this.tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0);
     this.ref = this.dialogService.open(TaskDialogComponent, {
       header: title,
@@ -122,7 +121,6 @@ export class TaskManagementComponent implements OnInit, OnDestroy{
       data: { title: title, lastUserId: lastUserId},
     });
     this.ref.onClose.subscribe((result) => {
-      this.isLoading = false;
       const tasksFromStorage = localStorage.getItem('tasks');
       this.tasks = tasksFromStorage ? JSON.parse(tasksFromStorage) : [];
       // this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Data Created', life: 3000 });
